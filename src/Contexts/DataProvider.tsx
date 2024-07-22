@@ -1,18 +1,30 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
 
-export const DataContext = createContext();
+interface Item {
+  id: string;
+  name: string;
+  completed: boolean;
+}
+
+interface Category {
+  id: string;
+  title: string;
+  items: Item[];
+}
+
+interface DataContextType {
+  data: Category[];
+  setData: Dispatch<SetStateAction<Category[]>>;
+}
+
+export const DataContext = createContext<DataContextType | undefined>(undefined);
 
 interface Props {
   children: ReactNode;
-  data: Data[];
-}
-interface Data {
-  id: string | number;
-  title: string;
 }
 
 const DataProvider = ({ children }: Props) => {
-  const [data, setData] = useState([
+  const [data, setData] = useState<Category[]>([
     {
       id: crypto.randomUUID(),
       title: "Groceries",
@@ -89,11 +101,9 @@ const DataProvider = ({ children }: Props) => {
   ]);
 
   return (
-    <>
-      <DataContext.Provider value={{ data, setData }}>
-        {children}
-      </DataContext.Provider>
-    </>
+    <DataContext.Provider value={{ data, setData }}>
+      {children}
+    </DataContext.Provider>
   );
 };
 

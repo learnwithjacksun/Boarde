@@ -4,8 +4,16 @@ import Heading from "../UI/Heading";
 import Icon from "../UI/Icon";
 import { useContext } from "react";
 import { DataContext } from "../../Contexts/DataProvider";
+
 const Home: React.FC = () => {
-  const {data} = useContext(DataContext)
+  const dataContext = useContext(DataContext);
+
+  if (!dataContext) {
+    return <div>Error: DataContext not found</div>;
+  }
+
+  const { data } = dataContext;
+
   return (
     <>
       <Heading />

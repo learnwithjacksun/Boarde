@@ -1,19 +1,35 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../../Contexts/DataProvider";
 import Header from "../UI/Header";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Icon from "../UI/Icon";
-const Items = () => {
-  const { id } = useParams();
-  const { data } = useContext(DataContext);
+
+
+
+const Items: React.FC = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const { id } = useParams(); 
+  const dataContext = useContext(DataContext);
+
+  if (!dataContext) {
+    return <div>Error: DataContext not found</div>;
+  }
+
+  const { data } = dataContext;
   const category = data.find((category) => category.id === id);
+
+  if (!category) {
+    return <div>Category not found</div>;
+  }
+
   const { items } = category;
   const completedCount = items.filter((item) => item.completed).length;
 
-  const [showForm, setShowForm] = useState<boolean>(false);
   const toggleForm = () => {
     setShowForm((prev) => !prev);
   };
+
   return (
     <>
       <Header title="Preview" />
@@ -36,9 +52,8 @@ const Items = () => {
               <Icon label="close" size="text-xl" color="text-subtext" />
               <span className="text-subtext text-sm">Cancel</span>
             </button>
-          ) :
-            (
-              <button
+          ) : (
+            <button
               onClick={toggleForm}
               className="absolute -bottom-5 flex-center right-5 btn h-14 w-auto px-6 bg-white border rounded-full shadow-md"
             >
