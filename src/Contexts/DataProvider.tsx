@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
+import React, { createContext, ReactNode, useState, Dispatch, SetStateAction, useEffect } from "react";
 
 interface Item {
   id: string;
@@ -15,6 +15,10 @@ interface Category {
 interface DataContextType {
   data: Category[];
   setData: Dispatch<SetStateAction<Category[]>>;
+  deleteCategory: (id: string) => void;
+  addItem: (categoryId: string, itemName: string) => void;
+  deleteItem: (categoryId: string, itemId: string) => void;
+  toggleItemCompletion: (categoryId: string, itemId: string) => void;
 }
 
 export const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -24,84 +28,69 @@ interface Props {
 }
 
 const DataProvider = ({ children }: Props) => {
-  const [data, setData] = useState<Category[]>([
-    {
-      id: crypto.randomUUID(),
-      title: "Groceries",
-      items: [
-        {
-          id: crypto.randomUUID(),
-          name: "Milk",
-          completed: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Bread",
-          completed: true,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Cabbage",
-          completed: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Salt",
-          completed: false,
-        },
-      ],
-    },
-    {
-      id: crypto.randomUUID(),
-      title: "Daily Tasks",
-      items: [
-        {
-          id: crypto.randomUUID(),
-          name: "Run",
-          completed: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Laundry",
-          completed: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Feed the dog",
-          completed: true,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Code",
-          completed: true,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Call my babe",
-          completed: true,
-        },
-      ],
-    },
-    {
-      id: crypto.randomUUID(),
-      title: "School",
-      items: [
-        {
-          id: crypto.randomUUID(),
-          name: "Solve Math",
-          completed: false,
-        },
-        {
-          id: crypto.randomUUID(),
-          name: "Practice Spanish",
-          completed: false,
-        },
-      ],
-    },
-  ]);
+  const [data, setData] = useState<Category[]>(() => {
+    const savedData = localStorage.getItem('categories');
+    return savedData ? JSON.parse(savedData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('categories', JSON.stringify(data));
+  }, [data]);
+
+  const deleteCategory = (id: string) => {
+    setData(prevData => prevData.filter(category => category.id !== id));
+  };
+
+  const addItem = (categoryId: string, itemName: string) => {
+    setData(prevData =>
+      prevData.map(category =>
+        category.id === categoryId
+          ? {
+              ...category,
+              items: [
+                ...category.items,
+                {
+                  id: crypto.randomUUID(),
+                  name: itemName,
+                  completed: false,
+                },
+              ],
+            }
+          : category
+      )
+    );
+  };
+
+  const deleteItem = (categoryId: string, itemId: string) => {
+    setData(prevData =>
+      prevData.map(category =>
+        category.id === categoryId
+          ? {
+              ...category,
+              items: category.items.filter(item => item.id !== itemId),
+            }
+          : category
+      )
+    );
+  };
+
+  const toggleItemCompletion = (categoryId: string, itemId: string) => {
+    setData(prevData =>
+      prevData.map(category =>
+        category.id === categoryId
+          ? {
+              ...category,
+              items: category.items.map(item =>
+                item.id === itemId ? { ...item, completed: !item.completed } : item
+              ),
+            }
+          : category
+      )
+    );
+  };
 
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider value={{ data, setData, deleteCategory, addItem, deleteItem, toggleItemCompletion }}>
       {children}
     </DataContext.Provider>
   );

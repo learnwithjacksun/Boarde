@@ -5,34 +5,27 @@ import Input from "../UI/Input";
 import { DataContext } from "../../Contexts/DataProvider";
 import { Link, useNavigate } from "react-router-dom";
 
-interface Category {
-  id: string;
-  title: string;
-  items: { id: string; name: string; completed: boolean }[];
-}
-
 const AddCategory: React.FC = () => {
-    const [title, setTitle] = useState("");
-    const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const navigate = useNavigate();
   const dataContext = useContext(DataContext);
-  
+
   if (!dataContext) {
     return <div>Error: DataContext not found</div>;
   }
 
   const { setData } = dataContext;
- 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newCategory: Category = {
+    const newCategory = {
       id: crypto.randomUUID(),
       title: title,
       items: [],
     };
 
-    setData(prevData => [...prevData, newCategory]);
+    setData((prevData) => [...prevData, newCategory]);
 
     navigate("/home");
   };

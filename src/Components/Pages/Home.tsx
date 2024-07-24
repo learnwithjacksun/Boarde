@@ -23,7 +23,7 @@ const Home: React.FC = () => {
             <Box key={item.id} {...item} />
           ))}
           <Link to="/add-category">
-            <div className="p-6 min-h-[230px] bg-secondary rounded-3xl border flex-center flex-col gap-2">
+            <div className="p-6 h-[230px] md:h-[240px] bg-secondary rounded-3xl border flex-center flex-col gap-2">
               <Icon label="add" size="text-3xl font-light" color="text-subtext" />
               <span className="text-subtext font-semibold">Add Category</span>
             </div>
