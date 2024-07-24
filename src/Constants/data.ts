@@ -5,7 +5,7 @@ export const socials = [
   },
   {
     icon: "fa-whatsapp",
-    path: "https://api.whatsapp.com/send?text=Check%20out%20Boarde%20-%20The%20simplest%20Todolist%20you%20will%20ever%20need!",
+    path: "https://api.whatsapp.com/send?text=Check%20out%20Boarde%20-%20The%20simplest%20Todolist%20you%20will%20ever%20need!%20https://boarde.netlify.app",
   },
   {
     icon: "fa-x-twitter",
