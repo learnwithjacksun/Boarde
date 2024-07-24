@@ -9,6 +9,7 @@ import AddCategory from "./Components/Pages/AddCategory";
 import DataProvider from "./Contexts/DataProvider";
 import Items from "./Components/Pages/Items";
 import ProtectedRoute from "./Components/Global/ProtectedRoute";
+import Lost from "./Components/Pages/Lost";
 const App = () => {
   return (
     <>
@@ -31,6 +32,7 @@ const App = () => {
                 element={<ProtectedRoute element={<Items />} />}
               />
             </Route>
+            <Route path="*" element={<Lost/>} />
           </Routes>
         </DataProvider>
       </AuthProvider>
