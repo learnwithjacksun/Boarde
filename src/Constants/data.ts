@@ -1,14 +1,15 @@
 export const socials = [
   {
     icon: "fa-facebook-f",
-    path: "",
+    path: "https://www.facebook.com/sharer/sharer.php?u=https://boarde.netlify.app",
   },
   {
-    icon: "fa-instagram",
-    path: "",
+    icon: "fa-whatsapp",
+    path: "https://api.whatsapp.com/send?text=Check%20out%20Boarde%20-%20The%20simplest%20Todolist%20you%20will%20ever%20need!",
   },
   {
     icon: "fa-x-twitter",
+    path: "https://twitter.com/intent/tweet?text=Check%20out%20Boarde%20-%20The%20simplest%20Todolist%20you'll%20ever%20need!%20https://boarde.netlify.app/",
   },
 ];
 
