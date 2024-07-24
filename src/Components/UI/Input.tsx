@@ -17,6 +17,7 @@ const Input: React.FC<InputField> = ({ type,value, id, placeholder, onChange }) 
         placeholder={placeholder}
         className="inputs"
         autoComplete="off"
+        autoFocus
       />
     </>
   );

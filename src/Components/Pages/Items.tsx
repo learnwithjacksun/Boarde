@@ -90,6 +90,7 @@ const Items = () => {
               placeholder="Enter item e.g walk my dog"
               className="flex-1 pl-4 text-sm focus:bg-secondary rounded-xl"
               autoComplete="off"
+              autoFocus
             />
             <button type="submit" className="btn-primary rounded-xl px-4">
               <span>Add</span>
