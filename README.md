@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+## Welcome on Boarde
+<p>Live URL: <a href="https://boarde.netlify.app/">Here</a></p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h2>Tech Stack Used:</h2>
+<u>
+  <li>Reactjs</li>
+  <li>Typescript</li>
+  <li>Tailwindcss</li>
+</u>
 
-Currently, two official plugins are available:
+<h2>Usage:</h2>
+- Fork and Clone using the available methods. (You know how, don't you?)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
+<h3>Installation:</h3>
+Install node modules first
 
 ```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<p>I think that's pretty much it...🤔</p>
+
+<h2>
+  The End!🎉
+</h2>
